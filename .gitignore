@@ -1,0 +1,5 @@
+.env
+node_modules/
+npm-debug.log*
+aykira-orders.json
+AYKIRA_RAZORPAY_FINAL_V18/
