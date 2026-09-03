@@ -23,13 +23,13 @@ function loadEnv(file) {
 }
 loadEnv(path.join(__dirname, '.env'));
 const DATA_FILE = path.join(__dirname, 'aykira-data.json');
-const ORDERS_FILE = path.join(__dirname, 'aykira-orders.json');
+const ORDERS_FILE = '/tmp/aykira-orders.json';
 const ADMIN_PASSWORD = process.env.AYKIRA_ADMIN_PASSWORD || 'AYKIRA@1234';
 function defaultData(){ return { products: [], settings: {eyebrow:'ETHNIC • FESTIVE • OCCASION WEAR',title:'Little looks. Big moments.',lead:'Beautiful ethnic and occasion wear, selected with love for every celebration.',collection:'More designs coming soon.',festive:'Styles for Eid, Diwali, weddings, parties and special occasions.',size:'Our collection is available across sizes 18–38.',pricing:{'18-22':749,'24-32':999,'34-38':1199}}}; }
 function loadData(){ try { const x=JSON.parse(fs.readFileSync(DATA_FILE,'utf8')); return {products:Array.isArray(x.products)?x.products:[],settings:x.settings||defaultData().settings}; } catch(_){ return defaultData(); } }
 function saveData(data){ const tmp=DATA_FILE+'.tmp'; fs.writeFileSync(tmp, JSON.stringify(data)); fs.renameSync(tmp, DATA_FILE); }
 function loadOrders(){ try { const x=JSON.parse(fs.readFileSync(ORDERS_FILE,'utf8')); return Array.isArray(x)?x:[]; } catch(_){ return []; } }
-function saveOrders(x){ const tmp=ORDERS_FILE+'.tmp'; fs.writeFileSync(tmp, JSON.stringify(x,null,2)); fs.renameSync(tmp,ORDERS_FILE); }
+function saveOrders(x){ try { fs.writeFileSync('/tmp/aykira-orders.json', JSON.stringify(x,null,2)); } catch (_) {} }
 
 const KEY_ID = process.env.RAZORPAY_KEY_ID;
 const KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
