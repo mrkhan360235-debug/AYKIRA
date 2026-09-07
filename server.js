@@ -69,7 +69,8 @@ function customer(raw) {
   return c;
 }
 function createApp(options = {}) {
-  const env = options.env || process.env;
+  const env = {...(options.env || process.env)};
+  for(const key of ['RAZORPAY_KEY_ID','RAZORPAY_KEY_SECRET'])env[key]=String(env[key]||'').trim();
   const root = path.resolve(options.dataDir || env.AYKIRA_DATA_DIR || path.join(__dirname,'data'));
   const publicDir = options.publicDir || path.join(__dirname,'public');
   const db=options.store || ((env.VERCEL || env.DATABASE_URL) ? new PostgresStore(env) : new FileStore(root));
