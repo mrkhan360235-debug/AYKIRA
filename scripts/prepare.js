@@ -7,5 +7,12 @@ async function main(){
  const db=new PostgresStore(process.env);await db.migrate();await db.ready();
  console.log('AYKIRA database ready: '+namespace(process.env)+'. Existing records preserved.');
  console.log('Preview uses its own tables and rejects live Razorpay keys.');
+ if(process.env.VERCEL_ENV==='preview'){
+  const fs=require('fs'),path=require('path');
+  const dir=path.join(__dirname,'../public/images');
+  const name=fs.readdirSync(dir).find(n=>n.endsWith('.png'));
+  try{await db.image(name,fs.readFileSync(path.join(dir,name)));console.log('Photo storage upload check passed.');}
+  catch(e){let message=String(e.message||'Unknown storage error');for(const value of Object.values(process.env)){if(value&&value.length>=8)message=message.split(value).join('[redacted]');}message=message.replace(/https?:\/\/\S+/g,'[url]').slice(0,400);console.log('Photo storage check failed: '+message);}
+ }
 }
 main().catch(e=>{console.error('AYKIRA setup failed: '+(e.message?.includes('missing')||e.message?.includes('Set a unique')||e.message?.includes('linked AYKIRA')?e.message:'Database setup could not complete. Check the linked Neon connection.'));process.exitCode=1;});
