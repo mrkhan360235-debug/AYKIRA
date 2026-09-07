@@ -6,6 +6,10 @@ async function main(){
  if(process.env.VERCEL_ENV==='production' && (process.env.AYKIRA_ADMIN_PASSWORD||'').length<16)throw new Error('Set a unique AYKIRA_ADMIN_PASSWORD (at least 16 characters) in Vercel Production before publishing.');
  const key=String(process.env.RAZORPAY_KEY_ID||'').trim(),secret=String(process.env.RAZORPAY_KEY_SECRET||'').trim();
  console.log('Payment configuration: '+JSON.stringify({key_present:!!key,secret_present:!!secret,key_mode:key.startsWith('rzp_test_')?'test':key.startsWith('rzp_live_')?'live':'unrecognized'}));
+ if(process.env.VERCEL_ENV==='preview'&&key.startsWith('rzp_test_')&&secret){
+  try{const r=await fetch('https://api.razorpay.com/v1/orders?count=1',{headers:{Authorization:'Basic '+Buffer.from(key+':'+secret).toString('base64')},signal:AbortSignal.timeout(15000)});await r.arrayBuffer();console.log('Razorpay credential verification HTTP status: '+r.status);}
+  catch(_){console.log('Razorpay credential verification could not reach provider.');}
+ }
  const db=new PostgresStore(process.env);await db.migrate();await db.ready();
  console.log('AYKIRA database ready: '+namespace(process.env)+'. Existing records preserved.');
  console.log('Preview uses its own tables and rejects live Razorpay keys.');

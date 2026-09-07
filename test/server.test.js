@@ -85,3 +85,15 @@ test('store and admin can start without payment credentials',async t=>{
  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'aykira-disabled-'));const app=createApp({dataDir:dir,env:{}});await new Promise(r=>app.listen(0,'127.0.0.1',r));t.after(async()=>{await new Promise(r=>app.close(r));fs.rmSync(dir,{recursive:true,force:true});});
  const base='http://127.0.0.1:'+app.address().port;assert.equal((await (await fetch(base+'/api/config')).json()).payments_enabled,false);assert.equal((await fetch(base+'/')).status,200);
 });
+
+test('rejected provider calls allow retry; uncertain timeouts keep the checkout claim',async t=>{
+ for(const rejected of [true,false]){
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'aykira-retry-'));let calls=0;
+  const app=createApp({dataDir:dir,env:{AYKIRA_ADMIN_PASSWORD:'test-password-123456789',RAZORPAY_KEY_ID:'rzp_test_mock',RAZORPAY_KEY_SECRET:'test-secret'},gateway:async(method,route,payload)=>{calls++;if(calls===1){const e=new Error('provider failure');e.status=502;e.definitiveRejection=rejected;throw e;}return {id:'order_retry',...payload};}});
+  await new Promise(r=>app.listen(0,'127.0.0.1',r));
+  try{const b={amount:159800,currency:'INR',checkout_token:'b'.repeat(64),items:[{productId:'design-01',colour:'Colour 1',size:'18',qty:2}],customer:{name:'Test',phone:'9876543210',address:'Test address',pincode:'110001',city:'Delhi',state:'Delhi',email:''}};
+  const send=()=>fetch('http://127.0.0.1:'+app.address().port+'/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+  assert.equal((await send()).status,502);assert.equal((await send()).status,rejected?200:409);assert.equal(calls,rejected?2:1);
+  }finally{await new Promise(r=>app.close(r));fs.rmSync(dir,{recursive:true,force:true});}
+ }
+});

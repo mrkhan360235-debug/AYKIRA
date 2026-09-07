@@ -89,7 +89,12 @@ function createApp(options = {}) {
     let response;
     try {response=await fetch('https://api.razorpay.com/v1'+endpoint,{method,headers:{Authorization:'Basic '+Buffer.from(env.RAZORPAY_KEY_ID+':'+env.RAZORPAY_KEY_SECRET).toString('base64'),'Content-Type':'application/json'},body:payload?JSON.stringify(payload):undefined,signal:AbortSignal.timeout(15000)});}catch(_){throw fail(502,'Payment service is temporarily unavailable.');}
     const d=await response.json().catch(()=>({}));
-    if(!response.ok)throw fail(502,'Payment service could not complete this request.');
+    if(!response.ok){
+      const authFailure=response.status===401||response.status===403||/authentication failed/i.test(String(d.error?.description||''));
+      console.error('Razorpay request rejected:',response.status,authFailure?'authentication':'provider_error');
+      const err=fail(502,authFailure?'Payment credentials were rejected by Razorpay. Please contact the store.':'Payment service could not complete this request. Please try again later.');
+      err.definitiveRejection=[400,401,403,404,422].includes(response.status);throw err;
+    }
     return d;
   }
   async function body(req,max=128*1024,raw=false) {
@@ -218,7 +223,9 @@ function createApp(options = {}) {
           const intent={aykira_order_id:id,tracking_hash:tokenHash,request_hash:requestHash,...q,customer:c,status:'Payment Pending',payment_status:'pending',created_at:new Date().toISOString()};
           let o;
           if(await db.claimOrder(intent)){
-            const r=await gateway('POST','/orders',{amount:q.amount,currency:'INR',receipt:id});
+            let r;
+            try{r=await gateway('POST','/orders',{amount:q.amount,currency:'INR',receipt:id});}
+            catch(e){if(e.definitiveRejection)await db.releaseRejectedOrder(id);throw e;}
             if(!r.id||r.amount!==q.amount||r.currency!=='INR')throw fail(502,'Payment order could not be confirmed.');
             o=await db.attachPaymentOrder(id,r.id);
           }else{
