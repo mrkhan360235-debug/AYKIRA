@@ -1,9 +1,0 @@
-AYKIRA FINAL V11
-
-1) Install Node.js LTS.
-2) Double-click START_AYKIRA.bat.
-3) Website opens at http://localhost:3000/
-4) Admin opens manually at http://localhost:3000/admin.html
-5) For phone testing on same Wi-Fi, open http://YOUR-PC-IP:3000/ .
-6) Admin data is stored on the server in aykira-data.json so website/admin share the same catalogue. Admin saves support image-heavy catalogue payloads.
-7) Razorpay test keys are in .env. Rotate the exposed test secret before production and replace with live credentials only on the server.

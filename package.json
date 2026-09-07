@@ -1,16 +1,24 @@
 {
-  "name": "aykira-razorpay",
-  "version": "1.0.0",
+  "name": "aykira-store",
+  "version": "23.0.0",
   "private": true,
-  "description": "AYKIRA static catalogue with Razorpay Standard Checkout backend",
+  "description": "AYKIRA store with durable Neon orders and Blob product images",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "setup": "node setup.js",
+    "test": "node --test test/*.test.js",
+    "vercel-build": "node scripts/prepare.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": "24.x"
   },
   "dependencies": {
-    "razorpay": "^2.9.6"
+    "@neondatabase/serverless": "1.1.0",
+    "@vercel/blob": "2.8.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "vercel": "59.11.7"
   }
 }

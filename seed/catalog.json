@@ -1,0 +1,284 @@
+{
+  "products": [
+    {
+      "id": "design-01",
+      "name": "Olive Festive Set",
+      "description": "Embroidered occasion wear",
+      "image": "/images/8b374e14ad029abd660749cdc22637ae2f97222930b0cb6ec9339fa6c77ff8e6.png",
+      "colours": [
+        {
+          "name": "Colour 1",
+          "image": "/images/8b374e14ad029abd660749cdc22637ae2f97222930b0cb6ec9339fa6c77ff8e6.png",
+          "active": true
+        },
+        {
+          "name": "Colour 2",
+          "image": "/images/8b374e14ad029abd660749cdc22637ae2f97222930b0cb6ec9339fa6c77ff8e6.png",
+          "active": true
+        },
+        {
+          "name": "Colour 3",
+          "image": "/images/8b374e14ad029abd660749cdc22637ae2f97222930b0cb6ec9339fa6c77ff8e6.png",
+          "active": true
+        },
+        {
+          "name": "Colour 4",
+          "image": "/images/8b374e14ad029abd660749cdc22637ae2f97222930b0cb6ec9339fa6c77ff8e6.png",
+          "active": true
+        }
+      ],
+      "available": true,
+      "customPricing": {
+        "enabled": true,
+        "prices": {
+          "18-22": 799,
+          "24-32": 999,
+          "34-38": 1199
+        }
+      }
+    },
+    {
+      "id": "design-02",
+      "name": "Pink Celebration Edit",
+      "description": "Festive party wear",
+      "image": "/images/a55e07994d25933be1bc5523c2ebf99cfcde97e5a1801fa540b20856482d0f35.png",
+      "available": true,
+      "colours": [
+        {
+          "name": "Colour 1",
+          "image": "/images/a55e07994d25933be1bc5523c2ebf99cfcde97e5a1801fa540b20856482d0f35.png",
+          "active": true
+        },
+        {
+          "name": "Colour 2",
+          "image": "/images/a55e07994d25933be1bc5523c2ebf99cfcde97e5a1801fa540b20856482d0f35.png",
+          "active": true
+        },
+        {
+          "name": "Colour 3",
+          "image": "/images/a55e07994d25933be1bc5523c2ebf99cfcde97e5a1801fa540b20856482d0f35.png",
+          "active": true
+        },
+        {
+          "name": "Colour 4",
+          "image": "/images/a55e07994d25933be1bc5523c2ebf99cfcde97e5a1801fa540b20856482d0f35.png",
+          "active": true
+        }
+      ],
+      "customPricing": {
+        "enabled": false
+      }
+    },
+    {
+      "id": "design-03",
+      "name": "Colour Story",
+      "description": "Ethnic co-ord styles",
+      "image": "/images/71ea12ea1a5d0395c7bf729cb771698f1776fade635a49e5eff3e1df39bdf0fa.png",
+      "colours": [
+        {
+          "name": "Colour 1",
+          "image": "/images/71ea12ea1a5d0395c7bf729cb771698f1776fade635a49e5eff3e1df39bdf0fa.png",
+          "active": true
+        },
+        {
+          "name": "Colour 2",
+          "image": "/images/71ea12ea1a5d0395c7bf729cb771698f1776fade635a49e5eff3e1df39bdf0fa.png",
+          "active": true
+        },
+        {
+          "name": "Colour 3",
+          "image": "/images/71ea12ea1a5d0395c7bf729cb771698f1776fade635a49e5eff3e1df39bdf0fa.png",
+          "active": true
+        },
+        {
+          "name": "Colour 4",
+          "image": "/images/71ea12ea1a5d0395c7bf729cb771698f1776fade635a49e5eff3e1df39bdf0fa.png",
+          "active": true
+        }
+      ],
+      "available": true,
+      "customPricing": {
+        "enabled": true,
+        "prices": {
+          "18-22": 699,
+          "24-32": 899,
+          "34-38": 999
+        }
+      }
+    },
+    {
+      "id": "design-04",
+      "name": "Ivory Occasion Set",
+      "description": "Embroidered festive wear",
+      "image": "/images/7d97be3940f1d6711c084a05d589c016ee2cd222a54a6ec53b911fa7d0a7b0ac.png",
+      "available": true,
+      "colours": [
+        {
+          "name": "Colour 1",
+          "image": "/images/7d97be3940f1d6711c084a05d589c016ee2cd222a54a6ec53b911fa7d0a7b0ac.png",
+          "active": true
+        },
+        {
+          "name": "Colour 2",
+          "image": "/images/7d97be3940f1d6711c084a05d589c016ee2cd222a54a6ec53b911fa7d0a7b0ac.png",
+          "active": true
+        },
+        {
+          "name": "Colour 3",
+          "image": "/images/7d97be3940f1d6711c084a05d589c016ee2cd222a54a6ec53b911fa7d0a7b0ac.png",
+          "active": true
+        },
+        {
+          "name": "Colour 4",
+          "image": "/images/7d97be3940f1d6711c084a05d589c016ee2cd222a54a6ec53b911fa7d0a7b0ac.png",
+          "active": true
+        }
+      ],
+      "customPricing": {
+        "enabled": false
+      }
+    },
+    {
+      "id": "design-05",
+      "name": "Aqua Elegance",
+      "description": "Festive ethnic wear",
+      "image": "/images/90e37c0c69463533a6b65c1d9477c2db216d6a8852684bca054415abdd654c03.png",
+      "available": true,
+      "colours": [
+        {
+          "name": "Colour 1",
+          "image": "/images/90e37c0c69463533a6b65c1d9477c2db216d6a8852684bca054415abdd654c03.png",
+          "active": true
+        },
+        {
+          "name": "Colour 2",
+          "image": "/images/90e37c0c69463533a6b65c1d9477c2db216d6a8852684bca054415abdd654c03.png",
+          "active": true
+        },
+        {
+          "name": "Colour 3",
+          "image": "/images/90e37c0c69463533a6b65c1d9477c2db216d6a8852684bca054415abdd654c03.png",
+          "active": true
+        },
+        {
+          "name": "Colour 4",
+          "image": "/images/90e37c0c69463533a6b65c1d9477c2db216d6a8852684bca054415abdd654c03.png",
+          "active": true
+        }
+      ],
+      "customPricing": {
+        "enabled": false
+      }
+    },
+    {
+      "id": "design-06",
+      "name": "Magenta Grace",
+      "description": "Party & celebration wear",
+      "image": "/images/16030fbd222da90d8410648c9ffe4ec561d338edcdf18aa23bfa1efccd5c6397.png",
+      "available": true,
+      "colours": [
+        {
+          "name": "Colour 1",
+          "image": "/images/16030fbd222da90d8410648c9ffe4ec561d338edcdf18aa23bfa1efccd5c6397.png",
+          "active": true
+        },
+        {
+          "name": "Colour 2",
+          "image": "/images/16030fbd222da90d8410648c9ffe4ec561d338edcdf18aa23bfa1efccd5c6397.png",
+          "active": true
+        },
+        {
+          "name": "Colour 3",
+          "image": "/images/16030fbd222da90d8410648c9ffe4ec561d338edcdf18aa23bfa1efccd5c6397.png",
+          "active": true
+        },
+        {
+          "name": "Colour 4",
+          "image": "/images/16030fbd222da90d8410648c9ffe4ec561d338edcdf18aa23bfa1efccd5c6397.png",
+          "active": true
+        }
+      ],
+      "customPricing": {
+        "enabled": false
+      }
+    },
+    {
+      "id": "design-07",
+      "name": "Rose Jacket Set",
+      "description": "Modern ethnic wear",
+      "image": "/images/1196aeb18ed6bc9fa8554b9a9a5f0dea8276c7dba1dda402c70f7feebce5e45f.png",
+      "available": true,
+      "colours": [
+        {
+          "name": "Colour 1",
+          "image": "/images/1196aeb18ed6bc9fa8554b9a9a5f0dea8276c7dba1dda402c70f7feebce5e45f.png",
+          "active": true
+        },
+        {
+          "name": "Colour 2",
+          "image": "/images/1196aeb18ed6bc9fa8554b9a9a5f0dea8276c7dba1dda402c70f7feebce5e45f.png",
+          "active": true
+        },
+        {
+          "name": "Colour 3",
+          "image": "/images/1196aeb18ed6bc9fa8554b9a9a5f0dea8276c7dba1dda402c70f7feebce5e45f.png",
+          "active": true
+        },
+        {
+          "name": "Colour 4",
+          "image": "/images/1196aeb18ed6bc9fa8554b9a9a5f0dea8276c7dba1dda402c70f7feebce5e45f.png",
+          "active": true
+        }
+      ],
+      "customPricing": {
+        "enabled": false
+      }
+    },
+    {
+      "id": "design-08",
+      "name": "Lavender Bloom",
+      "description": "Elegant occasion wear",
+      "image": "/images/e2bfdc714e4062a8f536839c41702c978ebeb790ae53412a52194b88de65b6f9.png",
+      "available": true,
+      "colours": [
+        {
+          "name": "Colour 1",
+          "image": "/images/e2bfdc714e4062a8f536839c41702c978ebeb790ae53412a52194b88de65b6f9.png",
+          "active": true
+        },
+        {
+          "name": "Colour 2",
+          "image": "/images/e2bfdc714e4062a8f536839c41702c978ebeb790ae53412a52194b88de65b6f9.png",
+          "active": true
+        },
+        {
+          "name": "Colour 3",
+          "image": "/images/e2bfdc714e4062a8f536839c41702c978ebeb790ae53412a52194b88de65b6f9.png",
+          "active": true
+        },
+        {
+          "name": "Colour 4",
+          "image": "/images/e2bfdc714e4062a8f536839c41702c978ebeb790ae53412a52194b88de65b6f9.png",
+          "active": true
+        }
+      ],
+      "customPricing": {
+        "enabled": false
+      }
+    }
+  ],
+  "settings": {
+    "eyebrow": "ETHNIC • FESTIVE • OCCASION WEAR",
+    "title": "Little looks. Big moments.",
+    "lead": "Beautiful ethnic and occasion wear, selected with love for every celebration.",
+    "collection": "More designs coming soon.",
+    "festive": "Styles for Eid, Diwali, weddings, parties and special occasions.",
+    "size": "Our collection is available across sizes 18–38.",
+    "pricing": {
+      "18-22": 749,
+      "24-32": 999,
+      "34-38": 1099
+    }
+  },
+  "revision": 1
+}

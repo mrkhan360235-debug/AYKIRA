@@ -2,17 +2,16 @@
 setlocal
 cd /d "%~dp0"
 where node >nul 2>nul
-if errorlevel 1 (echo Node.js 18+ required. & pause & exit /b 1)
-if not exist node_modules\razorpay (call npm install --no-audit --no-fund || (pause & exit /b 1))
-
-echo Checking AYKIRA server on port 3000...
-for /f "tokens=5" %%P in ('netstat -ano ^| findstr /R /C:":3000 .*LISTENING"') do (
-  echo Stopping old AYKIRA server PID %%P...
-  taskkill /F /PID %%P >nul 2>nul
+if errorlevel 1 (
+  echo Install Node.js 22 or newer first.
+  pause
+  exit /b 1
 )
-
-echo Starting AYKIRA V21 server...
-start "AYKIRA V21 Server" cmd /k "cd /d "%~dp0" && node server.js"
-timeout /t 2 /nobreak >nul
-start "" "http://localhost:3000/"
+node setup.js
+if errorlevel 1 (pause & exit /b 1)
+echo Open http://localhost:3000 after the server starts.
+echo Admin: http://localhost:3000/admin.html
+echo Keep this window open. Press Ctrl+C to stop your server.
+node server.js
+pause
 endlocal
