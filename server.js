@@ -77,7 +77,7 @@ function createApp(options = {}) {
   const catalog=()=>db.catalog(), readOrder=id=>db.readOrder(id), findOrder=id=>db.findOrder(id), allOrders=()=>db.listOrders();
   const adminPass=env.AYKIRA_ADMIN_PASSWORD||'';
   const preview=env.VERCEL_ENV==='preview';
-  const configured=!!env.RAZORPAY_KEY_ID&&!!env.RAZORPAY_KEY_SECRET&&(!preview||env.RAZORPAY_KEY_ID.startsWith('rzp_test_'));
+  const configured=!!env.RAZORPAY_KEY_ID&&!!env.RAZORPAY_KEY_SECRET&&(!preview||env.RAZORPAY_KEY_ID.startsWith('rzp_test_'))&&(env.VERCEL_ENV!=='production'||env.RAZORPAY_KEY_ID.startsWith('rzp_live_'));
   const secure=env.VERCEL==='1'||env.NODE_ENV==='production';
   async function rate(req,kind,max){
     const ip=env.VERCEL==='1'?String(req.headers['x-vercel-forwarded-for']||req.socket.remoteAddress):req.socket.remoteAddress;
@@ -263,7 +263,8 @@ function createApp(options = {}) {
       if(!['GET','HEAD'].includes(req.method))throw fail(405,'Method not allowed.');
       let pathname;try{pathname=decodeURIComponent(route);}catch(_){throw fail(400,'Invalid URL.');}
       if(pathname==='/')pathname='/index.html';
-      const allowed=['/index.html','/admin.html','/admin.js','/store.js','/styles.css','/favicon.ico'].includes(pathname)||/^\/images\/[a-f0-9]{64}\.(png|jpg|webp|gif)$/.test(pathname)||/^\/design-0[1-8]\.png$/.test(pathname);
+      if(['/contact','/about','/shipping','/exchanges','/privacy','/terms'].includes(pathname))pathname+='.html';
+      const allowed=['/index.html','/admin.html','/admin.js','/store.js','/styles.css','/favicon.ico','/contact.html','/about.html','/shipping.html','/exchanges.html','/privacy.html','/terms.html'].includes(pathname)||/^\/images\/[a-f0-9]{64}\.(png|jpg|webp|gif)$/.test(pathname)||/^\/design-0[1-8]\.png$/.test(pathname);
       const upload=/^\/uploads\/[a-f0-9]{64}\.(png|jpg|webp|gif)$/.test(pathname);
       if(!allowed&&!upload)throw fail(404,'Not found.');
       const file=upload?path.join(root,pathname):path.join(publicDir,pathname);
