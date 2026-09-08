@@ -250,12 +250,16 @@ function createApp(options = {}) {
           if(!env.RAZORPAY_WEBHOOK_SECRET)throw fail(503,'Webhook is not configured.');
           const raw=await body(req,1024*1024,true),signature=req.headers['x-razorpay-signature'];
           const expected=crypto.createHmac('sha256',env.RAZORPAY_WEBHOOK_SECRET).update(raw).digest('hex');
-          if(!/^[a-f0-9]{64}$/.test(signature||'')||!equal(expected,signature))throw fail(400,'Invalid webhook signature.');
-          let event;try{event=JSON.parse(raw);}catch(_){throw fail(400,'Invalid JSON.');}
+          if(!/^[a-f0-9]{64}$/.test(signature||'')||!equal(expected,signature)){
+            console.warn('Razorpay webhook rejected',JSON.stringify({reason:'signature_mismatch',signature_format_valid:/^[a-f0-9]{64}$/.test(signature||''),body_bytes:raw.length,body_length_matches:req.headers['content-length']===undefined?null:Number(req.headers['content-length'])===raw.length}));
+            throw fail(400,'Invalid webhook signature.');
+          }
+          let event;try{event=JSON.parse(raw);}catch(_){console.warn('Razorpay webhook rejected: invalid_json');throw fail(400,'Invalid JSON.');}
           if(['payment.captured','order.paid'].includes(event.event)){
             const p=event.payload?.payment?.entity,o=p&&await findOrder(p.order_id);
             if(o)await markPaid(o,p);else throw fail(503,'Order is not available yet. Retry this event.');
           }
+          console.info('Razorpay webhook accepted');
           return send(req,res,200,{success:true});
         }
         throw fail(404,'Endpoint not found.');
